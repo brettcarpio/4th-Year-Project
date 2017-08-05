@@ -12,18 +12,60 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{6efc3915-b21b-450f-9184-16c425faff17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GrammarSystem">
+      <UniqueIdentifier>{d6e9474f-9103-467b-93cf-f3e05d2a386a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager">
+      <UniqueIdentifier>{135b77d3-e1b3-4272-ac94-997e7d9e3e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes">
+      <UniqueIdentifier>{8ed9903d-2721-4640-99af-b93e3ee09bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes\Menu">
+      <UniqueIdentifier>{67eb7cf4-79ef-4396-a841-581d7b51f8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes\DungeonScene">
+      <UniqueIdentifier>{845d0748-9aa4-4185-ae8d-1e1aee52332d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\include\Game.cpp">
+    <ClCompile Include="Classes\src\GrammarSystem.cpp">
+      <Filter>Source Files\GrammarSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\SceneManager.cpp">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\Game.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\MenuScene.cpp">
+      <Filter>Source Files\SceneManager\Scenes\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\DungeonScene.cpp">
+      <Filter>Source Files\SceneManager\Scenes\DungeonScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\include\Game.h">
       <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\GrammarSystem.h">
+      <Filter>Source Files\GrammarSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\SceneManager.h">
+      <Filter>Source Files\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\Scene.h">
+      <Filter>Source Files\SceneManager\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\MenuScene.h">
+      <Filter>Source Files\SceneManager\Scenes\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\DungeonScene.h">
+      <Filter>Source Files\SceneManager\Scenes\DungeonScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

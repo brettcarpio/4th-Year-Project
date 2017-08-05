@@ -88,11 +88,20 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Classes\include\Game.cpp" />
+    <ClCompile Include="Classes\src\Game.cpp" />
+    <ClCompile Include="Classes\src\GrammarSystem.cpp" />
+    <ClCompile Include="Classes\src\DungeonScene.cpp" />
+    <ClCompile Include="Classes\src\SceneManager.cpp" />
+    <ClCompile Include="Classes\src\MenuScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\include\Game.h" />
+    <ClInclude Include="Classes\include\GrammarSystem.h" />
+    <ClInclude Include="Classes\include\DungeonScene.h" />
+    <ClInclude Include="Classes\include\MenuScene.h" />
+    <ClInclude Include="Classes\include\Scene.h" />
+    <ClInclude Include="Classes\include\SceneManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
