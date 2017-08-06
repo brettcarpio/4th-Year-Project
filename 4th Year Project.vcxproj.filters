@@ -70,5 +70,14 @@
     <ClInclude Include="Classes\include\DungeonScene.h">
       <Filter>Source Files\SceneManager\Scenes\DungeonScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\include\Graph.h">
+      <Filter>Source Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\GraphNode.h">
+      <Filter>Source Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\GraphArc.h">
+      <Filter>Source Files\Graph</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ void MenuScene::Render(sf::RenderWindow & window)
 
 void MenuScene::HandleInput(sf::Event e)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+	if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num2))
 	{
 		m_switchingScene = sceneswitch(true, "DungeonScene");
 	}

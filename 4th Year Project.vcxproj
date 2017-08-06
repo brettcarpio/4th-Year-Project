@@ -99,6 +99,9 @@
     <ClInclude Include="Classes\include\Game.h" />
     <ClInclude Include="Classes\include\GrammarSystem.h" />
     <ClInclude Include="Classes\include\DungeonScene.h" />
+    <ClInclude Include="Classes\include\Graph.h" />
+    <ClInclude Include="Classes\include\GraphArc.h" />
+    <ClInclude Include="Classes\include\GraphNode.h" />
     <ClInclude Include="Classes\include\MenuScene.h" />
     <ClInclude Include="Classes\include\Scene.h" />
     <ClInclude Include="Classes\include\SceneManager.h" />
