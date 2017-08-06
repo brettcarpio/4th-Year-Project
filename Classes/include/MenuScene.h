@@ -10,7 +10,7 @@ public:
 
 	void Update(sf::Time dt);
 	void Render(sf::RenderWindow & window);
-	void HandleInput();
+	void HandleInput(sf::Event e);
 
 private:
 	sf::Texture m_logoTexture;

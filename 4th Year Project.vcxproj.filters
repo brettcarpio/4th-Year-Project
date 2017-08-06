@@ -27,6 +27,9 @@
     <Filter Include="Source Files\SceneManager\Scenes\DungeonScene">
       <UniqueIdentifier>{845d0748-9aa4-4185-ae8d-1e1aee52332d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graph">
+      <UniqueIdentifier>{96cb2312-135c-4202-a2ed-553a67d172c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

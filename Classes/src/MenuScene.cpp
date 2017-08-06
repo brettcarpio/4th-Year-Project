@@ -24,7 +24,7 @@ void MenuScene::Render(sf::RenderWindow & window)
 	window.draw(m_logo);
 }
 
-void MenuScene::HandleInput()
+void MenuScene::HandleInput(sf::Event e)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
 	{

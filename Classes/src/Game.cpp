@@ -46,16 +46,16 @@ void Game::Render()
 
 void Game::ProcessEvents()
 {
-	sf::Event Event;
-	while (m_window.pollEvent(Event))
+	sf::Event e;
+	while (m_window.pollEvent(e))
 	{
-		if (Event.type == sf::Event::Closed)
+		if (e.type == sf::Event::Closed)
 			m_window.close();
 
-		if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+		if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Escape))
 			m_window.close();
 
-		m_scnMgr->HandleInput();
+		m_scnMgr->HandleInput(e);
 	}
 }
 

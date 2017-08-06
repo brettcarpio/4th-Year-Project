@@ -35,9 +35,9 @@ void SceneManager::Render(sf::RenderWindow & window)
 	m_currScene->Render(window);
 }
 
-void SceneManager::HandleInput()
+void SceneManager::HandleInput(sf::Event e)
 {
-	m_currScene->HandleInput();
+	m_currScene->HandleInput(e);
 
 	if (m_currScene->SwitchingScene().first == true)
 		SwitchScene(m_currScene->SwitchingScene().second);

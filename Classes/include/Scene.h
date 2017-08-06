@@ -14,7 +14,7 @@ public:
 
 	virtual void Update(sf::Time dt) = 0;
 	virtual void Render(sf::RenderWindow & window) = 0;
-	virtual void HandleInput() = 0;
+	virtual void HandleInput(sf::Event e) = 0;
 
 	virtual void Start() { m_alive = true; }
 	virtual void Stop() { m_alive = false; m_switchingScene = sceneswitch(false, ""); }
