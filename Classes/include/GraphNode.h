@@ -3,15 +3,8 @@
 
 #include <list>
 
-// Forward references
 template <typename NodeType, typename ArcType> class GraphArc;
 
-// -------------------------------------------------------
-// Name:        GraphNode
-// Description: This is the node class. The node class 
-//              contains data, and has a linked list of 
-//              arcs.
-// -------------------------------------------------------
 template<class NodeType, class ArcType>
 class GraphNode {
 public:
@@ -20,11 +13,12 @@ public:
 
 	NodeType m_data;
 	std::list<Arc> m_arcList;
-	bool m_marked;
+	bool m_marked;
+
 	Arc* GetArc(Node* p_node)
 	{
-		typename list<Arc>::iterator itr = m_arcList.begin();
-		typename list<Arc>::iterator end = m_arcList.end();
+		std::list<Arc>::iterator itr = m_arcList.begin();
+		std::list<Arc>::iterator end = m_arcList.end();
 
 		for (; itr != end; ++itr)
 		{

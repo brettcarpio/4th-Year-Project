@@ -3,6 +3,10 @@
 
 #include "Scene.h"
 #include "GrammarSystem.h"
+#include "Graph.h"
+
+#include <fstream>
+
 
 class DungeonScene : public Scene {
 public:
@@ -14,7 +18,11 @@ public:
 	void HandleInput(sf::Event e);
 
 private:
+	void SetupGraph();
+
+private:
 	GrammarSystem m_grammar;
+	Graph<std::string, std::string> m_graph;
 };
 
 #endif // !DUNGEON_SCENE_H

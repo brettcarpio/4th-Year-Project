@@ -2,7 +2,7 @@
 
 MenuScene::MenuScene(sf::RenderWindow& window) : Scene("MenuScene", false, sceneswitch(false, ""))
 {
-	if (!m_logoTexture.loadFromFile("Assets/logo.png"))
+	if (!m_logoTexture.loadFromFile("Assets/Menu/logo.png"))
 		std::cout << "logo not loaded!" << std::endl;
 	m_logo.setTexture(m_logoTexture);
 	m_logo.setOrigin(sf::Vector2f(m_logoTexture.getSize().x / 2, m_logoTexture.getSize().y / 2));
