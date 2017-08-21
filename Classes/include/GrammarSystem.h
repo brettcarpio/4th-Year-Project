@@ -46,20 +46,11 @@ public:
 				ruleData.push_back(line);
 			}
 
-			int nodecount = 0;
-			std::istringstream ssNodeCount(ruleData[1]);
-			while (std::getline(ssNodeCount, line, ','))
-			{
-				nodecount++;
-			}
-
-			Graph<std::string, std::string> * subGraph = new Graph<std::string, std::string>(nodecount);
+			Graph<std::string, std::string> subGraph = Graph<std::string, std::string>();
 			std::istringstream ssNodes(ruleData[1]);
-			int index = 0;
 			while (std::getline(ssNodes, line, ','))
 			{
-				subGraph->AddNode(line, index);
-				index++;
+				subGraph.AddNode(line);
 			}
 
 			std::istringstream ssArcs(ruleData[2]);
@@ -68,7 +59,7 @@ public:
 				int from, to;
 				std::stringstream arcData(line);
 				while (arcData >> from >> to)
-					subGraph->AddArc(from, to, "");
+					subGraph.AddArc(from, to, "");
 			}
 			m_rules.push_back(std::make_pair(ruleData[0], subGraph));
 		}
@@ -91,7 +82,7 @@ public:
 			{
 				if (isupper(c))
 				{
-					//Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_data);
+					Graph<NodeType, ArcType> * replacementGraph = SearchForRule(current->m_data);
 					//1.remove node from the graph and all arcs connected to it
 					
 					//2.add replacement graph and add arc between first node from replacement graph and all nodes
@@ -107,11 +98,34 @@ public:
 	}
 
 private:
-	std::vector<std::pair<std::string, Graph<NodeType, ArcType>*>> m_rules;
+	std::vector<std::pair<std::string, Graph<NodeType, ArcType>>> m_rules;
 
-	Graph<NodeType, ArcType> SearchForRule(std::string code)
+	Graph<NodeType, ArcType> * SearchForRule(std::string code)
 	{
-		return 0;
+		std::vector<Graph<NodeType, ArcType>*> rules;
+		for (int i = 0; i < m_rules.size(); i++)
+		{
+			if (m_rules.at(i).first == code)
+			{
+				rules.push_back(m_rules.at(i).second);
+			}
+		}
+
+		if (rules.size() == 0)
+		{
+			std::cout << "no rule found!" << std::endl;
+			return 0;
+		}
+		else if (rules.size() == 1)
+		{
+			//return rules.at(0);
+		}
+		else if (rules.size() > 1)
+		{
+			int j = rand() % 2;
+			int i = rand() % m_rules.size();
+			//return rules.at(i);
+		}
 	}
 
 };

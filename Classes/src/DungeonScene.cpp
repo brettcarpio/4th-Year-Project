@@ -35,20 +35,14 @@ void DungeonScene::SetupGraph()
 	int noOfNodes = 0;
 
 	std::ifstream file;
-	file.open("Assets/DungeonScene/Graph/nodes.txt");
-	std::string line;
-	while(std::getline(file, line))
-		noOfNodes++;
-	m_graph = Graph<std::string, std::string>(noOfNodes);
-	file.close();
+
+	m_graph = Graph<std::string, std::string>();
 
 	file.open("Assets/DungeonScene/Graph/nodes.txt");
-	int index = 0;
 	std::string data;
-	while (file >> data && index < noOfNodes)
+	while (file >> data)
 	{
-		m_graph.AddNode(data, index);
-		index++;
+		m_graph.AddNode(data);
 	}
 	file.close();
 
@@ -65,5 +59,5 @@ void DungeonScene::TranslateGraph()
 {
 	m_grammar = GrammarSystem<std::string, std::string>();
 	m_grammar.CreateRules("Assets/DungeonScene/Graph/rules.txt");
-	//m_grammar.Translate(m_graph);
+	//Graph<std::string, std::string> temp = m_grammar.Translate(m_graph);
 }

@@ -15,14 +15,17 @@ public:
 	typedef GraphNode<NodeType, ArcType> Node;
 	
 	std::vector<Node*> m_nodes;
-	int m_count;
 
 	Graph() {}
-	Graph(int size) : m_nodes(size)
+
+	Graph(const Graph& g)
 	{
-		for (int i = 0; i < size; i++)
-			m_nodes[i] = 0;
-		m_count = 0;
+		for (int i = 0; i < g.m_nodes.size(); i++)
+		{
+			Node* node = new Node;
+			node = g.m_nodes.at(i);
+			m_nodes.push_back(node);
+		}
 	}
 
 	~Graph()
@@ -34,15 +37,14 @@ public:
 		}
 	}
 
-	bool AddNode(NodeType data, int index)
+	bool AddNode(NodeType data)
 	{
-		if (m_nodes[index] != 0)
-			return false;
+		Node* node = new Node;
+		node->m_data = data;
+		node->m_marked = false;
 
-		m_nodes[index] = new Node;
-		m_nodes[index]->m_data = data;
-		m_nodes[index]->m_marked = false;
-		m_count++;
+		m_nodes.push_back(node);
+
 		return true;
 	}
 
