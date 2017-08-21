@@ -7,7 +7,6 @@
 
 #include <fstream>
 
-
 class DungeonScene : public Scene {
 public:
 	DungeonScene(sf::RenderWindow& window);
@@ -19,9 +18,10 @@ public:
 
 private:
 	void SetupGraph();
+	void TranslateGraph();
 
 private:
-	GrammarSystem m_grammar;
+	GrammarSystem<std::string, std::string> m_grammar;
 	Graph<std::string, std::string> m_graph;
 };
 

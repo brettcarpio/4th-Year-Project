@@ -89,7 +89,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Classes\src\Game.cpp" />
-    <ClCompile Include="Classes\src\GrammarSystem.cpp" />
     <ClCompile Include="Classes\src\DungeonScene.cpp" />
     <ClCompile Include="Classes\src\SceneManager.cpp" />
     <ClCompile Include="Classes\src\MenuScene.cpp" />

@@ -35,9 +35,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\src\GrammarSystem.cpp">
-      <Filter>Source Files\GrammarSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\src\SceneManager.cpp">
       <Filter>Source Files\SceneManager</Filter>
     </ClCompile>

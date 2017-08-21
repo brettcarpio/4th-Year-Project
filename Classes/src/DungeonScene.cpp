@@ -2,11 +2,8 @@
 
 DungeonScene::DungeonScene(sf::RenderWindow& window) : Scene("DungeonScene", false, sceneswitch(false, ""))
 {
-	m_grammar = GrammarSystem();
-	
-
 	SetupGraph();
-
+	TranslateGraph();
 }
 
 DungeonScene::~DungeonScene()
@@ -27,10 +24,10 @@ void DungeonScene::HandleInput(sf::Event e)
 	{
 		m_switchingScene = sceneswitch(true, "MenuScene");
 	}
-	if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::A))
+	/*if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::A))
 	{
 		m_grammar.ConvertToLowercase("TESt123 house TREE food");
-	}
+	}*/
 }
 
 void DungeonScene::SetupGraph()
@@ -48,10 +45,25 @@ void DungeonScene::SetupGraph()
 	file.open("Assets/DungeonScene/Graph/nodes.txt");
 	int index = 0;
 	std::string data;
-	while (file >> data &&  index < noOfNodes)
+	while (file >> data && index < noOfNodes)
 	{
 		m_graph.AddNode(data, index);
 		index++;
 	}
 	file.close();
+
+	file.open("Assets/DungeonScene/Graph/arcs.txt");
+	int from, to;
+	while (file >> from >> to)
+	{
+		m_graph.AddArc(from, to, "");
+	}
+	file.close();
+}
+
+void DungeonScene::TranslateGraph()
+{
+	m_grammar = GrammarSystem<std::string, std::string>();
+	m_grammar.CreateRules("Assets/DungeonScene/Graph/rules.txt");
+	//m_grammar.Translate(m_graph);
 }

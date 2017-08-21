@@ -80,6 +80,7 @@ public:
 		else
 			m_nodes[from]->RemoveArc(m_nodes[to]);
 	}
+
 };
 
 #endif // !GRAPH_H
