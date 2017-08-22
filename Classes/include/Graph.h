@@ -18,13 +18,11 @@ public:
 
 	Graph() {}
 
-	Graph(const Graph& g)
+	Graph(const Graph& g) : m_nodes(g.m_nodes.size())
 	{
 		for (int i = 0; i < g.m_nodes.size(); i++)
 		{
-			Node* node = new Node;
-			node = g.m_nodes.at(i);
-			m_nodes.push_back(node);
+			m_nodes[i] = new Node(*g.m_nodes[i]);
 		}
 	}
 

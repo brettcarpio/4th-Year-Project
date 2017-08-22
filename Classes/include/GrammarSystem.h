@@ -34,7 +34,7 @@ public:
 
 		file.close();
 
-		
+		m_rules.reserve(data.size());
 		for (int i = 0; i < data.size(); i++)
 		{
 			std::istringstream ss(data[i]);
