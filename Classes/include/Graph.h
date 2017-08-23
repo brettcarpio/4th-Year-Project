@@ -98,6 +98,39 @@ public:
 			m_nodes[from]->RemoveArc(m_nodes[to]);
 	}
 
+	void AddGraph(const Graph<NodeType, ArcType> &g, Node* previous, Node* following, ArcType prevToCurr, ArcType follToCurr, ArcType currToPrev, ArcType currToFoll)
+	{
+		std::vector<Node*> temp;
+		for (int i = 0; i < g.m_nodes.size(); i++)
+		{
+			Node* node = new Node;
+			node->m_data = g.m_nodes[i]->m_data;
+			temp.push_back(node);
+		}
+
+		for (int i = 0; i < g.m_nodes.size(); i++)
+		{
+			for (int j = 0; j < g.m_nodes.size(); j++)
+			{
+				Arc* arc = g.m_nodes[i]->GetArc(g.m_nodes[j]);
+				if (arc != nullptr)
+				{
+					temp[i]->AddArc(temp[j], arc->m_weight);
+				}
+			}
+		}
+
+		previous->AddArc(temp.front(), prevToCurr);
+		following->AddArc(temp.back(), follToCurr);
+
+		temp.front()->AddArc(previous, currToPrev);
+		temp.back()->AddArc(following, currToFoll);
+
+		for (int i = 0; i < temp.size(); i++)
+		{
+			m_nodes.push_back(temp[i]);
+		}
+	}
 };
 
 #endif // !GRAPH_H

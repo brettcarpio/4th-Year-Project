@@ -83,12 +83,25 @@ public:
 				if (isupper(c))
 				{
 					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_data);
-					newGraph.RemoveNode(0);
+
 					Node* previous = current->m_arcList.front().m_node;
 					Node* following = current->m_arcList.back().m_node;
 
+					ArcType prevToCurr = previous->GetArc(current)->m_weight;
+					ArcType follToCurr = following->GetArc(current)->m_weight;
+
+					ArcType currToPrev = current->GetArc(previous)->m_weight;
+					ArcType currToFoll = current->GetArc(following)->m_weight;
+
 					previous->RemoveArc(current);
 					following->RemoveArc(current);
+
+					std::vector<Node*>::iterator it = std::find(newGraph.m_nodes.begin(), newGraph.m_nodes.end(), current);
+					newGraph.RemoveNode(std::distance(newGraph.m_nodes.begin(), it));
+
+					newGraph.AddGraph(replacementGraph, previous, following, prevToCurr, follToCurr, currToPrev, currToFoll);
+					
+					break;
 				}
 			}
 			
