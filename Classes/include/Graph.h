@@ -76,7 +76,7 @@ public:
 					RemoveArc(node, index);
 			}
 			delete m_nodes[index];
-			m_nodes[index] = 0;
+			m_nodes.erase(std::remove(m_nodes.begin(), m_nodes.end(), m_nodes[index]), m_nodes.end());
 		}
 	}
 
