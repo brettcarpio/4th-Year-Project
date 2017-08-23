@@ -82,13 +82,13 @@ public:
 			{
 				if (isupper(c))
 				{
-					Graph<NodeType, ArcType> * replacementGraph = SearchForRule(current->m_data);
-					//1.remove node from the graph and all arcs connected to it
-					
-					//2.add replacement graph and add arc between first node from replacement graph and all nodes
-					//connecting from  previous node
-					//from the removed node.
-					//3.add arc between last node from the replacement graph and all the nodes connecting from the removed node.
+					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_data);
+					newGraph.RemoveNode(0);
+					Node* previous = current->m_arcList.front().m_node;
+					Node* following = current->m_arcList.back().m_node;
+
+					previous->RemoveArc(current);
+					following->RemoveArc(current);
 				}
 			}
 			
@@ -100,9 +100,9 @@ public:
 private:
 	std::vector<std::pair<std::string, Graph<NodeType, ArcType>>> m_rules;
 
-	Graph<NodeType, ArcType> * SearchForRule(std::string code)
+	Graph<NodeType, ArcType> SearchForRule(std::string code)
 	{
-		std::vector<Graph<NodeType, ArcType>*> rules;
+		std::vector<Graph<NodeType, ArcType>> rules;
 		for (int i = 0; i < m_rules.size(); i++)
 		{
 			if (m_rules.at(i).first == code)
@@ -114,17 +114,16 @@ private:
 		if (rules.size() == 0)
 		{
 			std::cout << "no rule found!" << std::endl;
-			return 0;
+			return Graph<std::string, std::string>();
 		}
 		else if (rules.size() == 1)
 		{
-			//return rules.at(0);
+			return rules.at(0);
 		}
 		else if (rules.size() > 1)
 		{
-			int j = rand() % 2;
 			int i = rand() % m_rules.size();
-			//return rules.at(i);
+			return rules.at(i);
 		}
 	}
 

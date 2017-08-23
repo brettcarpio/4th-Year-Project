@@ -17,7 +17,7 @@ void Game::Run()
 {
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
-	srand(time(NULL));
+	
 	while (m_window.isOpen())
 	{
 		sf::Time elapsedTime = clock.restart();

@@ -17,15 +17,12 @@ public:
 
 	Arc* GetArc(Node* p_node)
 	{
-		std::list<Arc>::iterator itr = m_arcList.begin();
-		std::list<Arc>::iterator end = m_arcList.end();
-
-		for (; itr != end; ++itr)
+		for (std::list<Arc>::iterator itr = m_arcList.begin(); itr != m_arcList.end(); ++itr)
 		{
 			if ((*itr).m_node == p_node)
 				return &(*itr);
 		}
-		return 0;
+		return nullptr;
 	}
 
 	void AddArc(Node* p_node, ArcType p_weight)
@@ -38,8 +35,8 @@ public:
 
 	void RemoveArc(Node* p_node)
 	{
-		typename list<Arc>::iterator itr = m_arcList.begin();
-		typename list<Arc>::iterator end = m_arcList.end();
+		std::list<Arc>::iterator itr = m_arcList.begin();
+		std::list<Arc>::iterator end = m_arcList.end();
 		for (; itr != end; ++itr)
 		{
 			if ((*itr).m_node == p_node)

@@ -18,11 +18,24 @@ public:
 
 	Graph() {}
 
-	Graph(const Graph& g) : m_nodes(g.m_nodes.size())
+	Graph(const Graph &g) : m_nodes(g.m_nodes.size())
 	{
 		for (int i = 0; i < g.m_nodes.size(); i++)
 		{
-			m_nodes[i] = new Node(*g.m_nodes[i]);
+			m_nodes[i] = new Node;
+			m_nodes[i]->m_data = g.m_nodes[i]->m_data;
+		}
+
+		for (int i = 0; i < g.m_nodes.size(); i++)
+		{
+			for (int j = 0; j < g.m_nodes.size(); j++)
+			{
+				Arc* arc = g.m_nodes[i]->GetArc(g.m_nodes[j]);
+				if (arc != nullptr)
+				{
+					AddArc(i, j, arc->m_weight);
+				}
+			}
 		}
 	}
 
@@ -31,7 +44,10 @@ public:
 		for (int i = 0; i < m_nodes.size(); i++)
 		{
 			if (m_nodes[i] != 0)
+			{
 				delete m_nodes[i];
+				m_nodes[i] = nullptr;
+			}
 		}
 	}
 
@@ -50,16 +66,17 @@ public:
 	{
 		if (m_nodes[index] != 0)
 		{
-			int node;
-			Arc* arc;
+			Arc* arc = nullptr;
 
-			for (node = 0; node < m_nodes.size(); node++)
+			for (int node = 0; node < m_nodes.size(); node++)
 			{
 				if (m_nodes[node] != 0)
 					arc = m_nodes[node]->GetArc(m_nodes[index]);
-				if (arc != 0)
+				if (arc != nullptr)
 					RemoveArc(node, index);
 			}
+			delete m_nodes[index];
+			m_nodes[index] = 0;
 		}
 	}
 
@@ -76,7 +93,7 @@ public:
 	void RemoveArc(int from, int to)
 	{
 		if (m_nodes[from] == 0 || m_nodes[to] == 0)
-			return false;
+			std::cout << "node doesn't exist" << std::endl;
 		else
 			m_nodes[from]->RemoveArc(m_nodes[to]);
 	}

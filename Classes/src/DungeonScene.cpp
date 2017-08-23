@@ -59,5 +59,5 @@ void DungeonScene::TranslateGraph()
 {
 	m_grammar = GrammarSystem<std::string, std::string>();
 	m_grammar.CreateRules("Assets/DungeonScene/Graph/rules.txt");
-	//Graph<std::string, std::string> temp = m_grammar.Translate(m_graph);
+	Graph<std::string, std::string> temp = m_grammar.Translate(m_graph);
 }

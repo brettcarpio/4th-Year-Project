@@ -16,6 +16,7 @@
 
 int main()
 {
+	srand(time(NULL));
 	Game game;
 	game.Run();
 	return EXIT_SUCCESS;
