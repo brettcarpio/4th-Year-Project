@@ -8,9 +8,16 @@
 #include <fstream>
 
 class DungeonScene : public Scene {
+struct Room
+{
+	sf::Texture m_tex;
+	sf::Sprite m_sprite;
+	char m_dir;
+	std::queue<char> m_out;
+};
 public:
-	typedef GraphArc<std::string, std::string> Arc;
-	typedef GraphNode<std::string, std::string> Node;
+	typedef GraphArc<Room, std::string> Arc;
+	typedef GraphNode<Room, std::string> Node;
 
 	DungeonScene(sf::RenderWindow& window);
 	~DungeonScene();
@@ -25,18 +32,14 @@ private:
 	void RenderDungeon();
 	void ClearDrawables();
 	void CreateRoom(Node* node, Node* parent);
-	char GetDirection(std::string name);
+	void SetNodeData(Node* node, Node* parent);
 
 private:
-	struct Room
-	{
-		sf::Texture* m_tex;
-		sf::Sprite m_sprite;
-	};
-	GrammarSystem<std::string, std::string> m_grammar;
-	Graph<std::string, std::string> m_graph;
+	GrammarSystem<Room, std::string> m_grammar;
+	Graph<Room, std::string>* m_graph;
+	Graph<Room, std::string>* m_translatedGraph;
 
-	std::vector<Room> m_rooms;
+	std::vector<Node*> m_rooms;
 };
 
 #endif // !DUNGEON_SCENE_H

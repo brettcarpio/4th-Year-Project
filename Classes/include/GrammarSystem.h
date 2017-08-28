@@ -47,10 +47,11 @@ public:
 			}
 
 			Graph<NodeType, ArcType> ruleGraph = Graph<NodeType, ArcType>();
+			NodeType type;
 			std::istringstream ssNodes(ruleData[1]);
 			while (std::getline(ssNodes, line, ','))
 			{
-				ruleGraph.AddNode(line);
+				ruleGraph.AddNode(line, type);
 			}
 
 			std::istringstream ssArcs(ruleData[2]);
@@ -65,24 +66,24 @@ public:
 		}
 	}
 
-	Graph<NodeType, ArcType> Translate(Graph<NodeType, ArcType> &graph)
+	Graph<NodeType, ArcType>* Translate(Graph<NodeType, ArcType> *graph)
 	{
-		Graph<NodeType, ArcType> newGraph = graph;
+		Graph<NodeType, ArcType> *newGraph = graph;
 		std::queue<Node*> nodeQueue;
-		for (int i = 0; i < newGraph.m_nodes.size(); i++)
+		for (int i = 0; i < newGraph->m_nodes.size(); i++)
 		{
-			nodeQueue.push(newGraph.m_nodes.at(i));
+			nodeQueue.push(newGraph->m_nodes.at(i));
 		}
 		
 		while (nodeQueue.size() != 0)
 		{
 			Node* current = nodeQueue.front();
 
-			for (char &c : current->m_data)
+			for (char &c : current->m_name)
 			{
 				if (isupper(c))
 				{
-					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_data);
+					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_name);
 
 					Node* previous = current->m_arcList.front().m_node;
 					Node* following = current->m_arcList.back().m_node;
@@ -96,10 +97,10 @@ public:
 					previous->RemoveArc(current);
 					following->RemoveArc(current);
 
-					std::vector<Node*>::iterator it = std::find(newGraph.m_nodes.begin(), newGraph.m_nodes.end(), current);
-					newGraph.RemoveNode(std::distance(newGraph.m_nodes.begin(), it));
+					std::vector<Node*>::iterator it = std::find(newGraph->m_nodes.begin(), newGraph->m_nodes.end(), current);
+					newGraph->RemoveNode(std::distance(newGraph->m_nodes.begin(), it));
 
-					newGraph.AddGraph(replacementGraph, previous, following, prevToCurr, follToCurr, currToPrev, currToFoll);
+					newGraph->AddGraph(replacementGraph, previous, following, prevToCurr, follToCurr, currToPrev, currToFoll);
 					
 					break;
 				}

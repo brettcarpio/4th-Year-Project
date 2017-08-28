@@ -52,9 +52,10 @@ public:
 		}
 	}
 
-	bool AddNode(NodeType data)
+	bool AddNode(std::string name, NodeType data)
 	{
 		Node* node = new Node;
+		node->m_name = name;
 		node->m_data = data;
 		node->m_marked = false;
 
@@ -105,6 +106,7 @@ public:
 		for (int i = 0; i < g.m_nodes.size(); i++)
 		{
 			Node* node = new Node;
+			node->m_name = g.m_nodes[i]->m_name;
 			node->m_data = g.m_nodes[i]->m_data;
 			temp.push_back(node);
 		}

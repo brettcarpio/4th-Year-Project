@@ -11,10 +11,20 @@ public:
 	typedef GraphArc<NodeType, ArcType> Arc;
 	typedef GraphNode<NodeType, ArcType> Node;
 
+	std::string m_name;
 	NodeType m_data;
 	std::list<Arc> m_arcList;
 	bool m_marked;
-	std::string m_name;
+
+	GraphNode() {}
+
+	GraphNode(const GraphNode & node)
+	{
+		m_name = node.m_name;
+		m_data = node.m_data;
+		m_arcList = node.m_arcList;
+		m_marked = node.m_marked;
+	}
 
 	Arc* GetArc(Node* p_node)
 	{
