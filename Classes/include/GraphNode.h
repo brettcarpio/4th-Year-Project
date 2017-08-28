@@ -14,6 +14,7 @@ public:
 	NodeType m_data;
 	std::list<Arc> m_arcList;
 	bool m_marked;
+	std::string m_name;
 
 	Arc* GetArc(Node* p_node)
 	{

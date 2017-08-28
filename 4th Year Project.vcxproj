@@ -107,6 +107,11 @@
     <ClInclude Include="Classes\include\Scene.h" />
     <ClInclude Include="Classes\include\SceneManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\DungeonScene\Graph\arcs.txt" />
+    <Text Include="Assets\DungeonScene\Graph\nodes.txt" />
+    <Text Include="Assets\DungeonScene\Graph\rules.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

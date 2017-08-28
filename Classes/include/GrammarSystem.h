@@ -46,11 +46,11 @@ public:
 				ruleData.push_back(line);
 			}
 
-			Graph<std::string, std::string> subGraph = Graph<std::string, std::string>();
+			Graph<NodeType, ArcType> ruleGraph = Graph<NodeType, ArcType>();
 			std::istringstream ssNodes(ruleData[1]);
 			while (std::getline(ssNodes, line, ','))
 			{
-				subGraph.AddNode(line);
+				ruleGraph.AddNode(line);
 			}
 
 			std::istringstream ssArcs(ruleData[2]);
@@ -59,9 +59,9 @@ public:
 				int from, to;
 				std::stringstream arcData(line);
 				while (arcData >> from >> to)
-					subGraph.AddArc(from, to, "");
+					ruleGraph.AddArc(from, to, "");
 			}
-			m_rules.push_back(std::make_pair(ruleData[0], subGraph));
+			m_rules.push_back(std::make_pair(ruleData[0], ruleGraph));
 		}
 	}
 
@@ -127,7 +127,7 @@ private:
 		if (rules.size() == 0)
 		{
 			std::cout << "no rule found!" << std::endl;
-			return Graph<std::string, std::string>();
+			return Graph<NodeType, ArcType>();
 		}
 		else if (rules.size() == 1)
 		{
@@ -139,7 +139,6 @@ private:
 			return rules.at(i);
 		}
 	}
-
 };
 
 #endif

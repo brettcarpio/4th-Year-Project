@@ -30,6 +30,12 @@
     <Filter Include="Source Files\Graph">
       <UniqueIdentifier>{96cb2312-135c-4202-a2ed-553a67d172c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Grid">
+      <UniqueIdentifier>{ac7a9fca-e340-4d7c-907b-820917404aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes\DungeonScene\Data">
+      <UniqueIdentifier>{68a50b9e-70da-4e2f-b070-66cd7c81eb1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,5 +82,16 @@
     <ClInclude Include="Classes\include\GraphArc.h">
       <Filter>Source Files\Graph</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\DungeonScene\Graph\arcs.txt">
+      <Filter>Source Files\SceneManager\Scenes\DungeonScene\Data</Filter>
+    </Text>
+    <Text Include="Assets\DungeonScene\Graph\nodes.txt">
+      <Filter>Source Files\SceneManager\Scenes\DungeonScene\Data</Filter>
+    </Text>
+    <Text Include="Assets\DungeonScene\Graph\rules.txt">
+      <Filter>Source Files\SceneManager\Scenes\DungeonScene\Data</Filter>
+    </Text>
   </ItemGroup>
 </Project>

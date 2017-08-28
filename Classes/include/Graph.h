@@ -23,6 +23,7 @@ public:
 		for (int i = 0; i < g.m_nodes.size(); i++)
 		{
 			m_nodes[i] = new Node;
+			m_nodes[i]->m_name = g.m_nodes[i]->m_name;
 			m_nodes[i]->m_data = g.m_nodes[i]->m_data;
 		}
 

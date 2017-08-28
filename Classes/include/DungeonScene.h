@@ -9,6 +9,9 @@
 
 class DungeonScene : public Scene {
 public:
+	typedef GraphArc<std::string, std::string> Arc;
+	typedef GraphNode<std::string, std::string> Node;
+
 	DungeonScene(sf::RenderWindow& window);
 	~DungeonScene();
 
@@ -18,11 +21,22 @@ public:
 
 private:
 	void SetupGraph();
-	void TranslateGraph();
+	void SetupGrammar();
+	void RenderDungeon();
+	void ClearDrawables();
+	void CreateRoom(Node* node, Node* parent);
+	char GetDirection(std::string name);
 
 private:
+	struct Room
+	{
+		sf::Texture* m_tex;
+		sf::Sprite m_sprite;
+	};
 	GrammarSystem<std::string, std::string> m_grammar;
 	Graph<std::string, std::string> m_graph;
+
+	std::vector<Room> m_rooms;
 };
 
 #endif // !DUNGEON_SCENE_H
