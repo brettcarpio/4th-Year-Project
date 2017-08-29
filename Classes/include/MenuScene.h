@@ -11,6 +11,8 @@ public:
 	void Update(sf::Time dt);
 	void Render(sf::RenderWindow & window);
 	void HandleInput(sf::Event e);
+	void Start();
+	void Stop();
 
 private:
 	sf::Texture m_logoTexture;

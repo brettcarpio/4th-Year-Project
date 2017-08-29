@@ -36,6 +36,9 @@
     <Filter Include="Source Files\SceneManager\Scenes\DungeonScene\Data">
       <UniqueIdentifier>{68a50b9e-70da-4e2f-b070-66cd7c81eb1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes\CellScene">
+      <UniqueIdentifier>{4a9b21da-e2fb-4b72-850a-0f84a5bac6b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Classes\src\DungeonScene.cpp">
       <Filter>Source Files\SceneManager\Scenes\DungeonScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\CellScene.cpp">
+      <Filter>Source Files\SceneManager\Scenes\CellScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="Classes\include\GraphArc.h">
       <Filter>Source Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\CellScene.h">
+      <Filter>Source Files\SceneManager\Scenes\CellScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

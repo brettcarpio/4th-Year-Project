@@ -10,6 +10,9 @@ SceneManager::SceneManager(sf::RenderWindow& window)
 	DungeonScene * dungeonScene = new DungeonScene(window);
 	m_scenes.push_back(dungeonScene);
 
+	CellScene * cellScene = new CellScene(window);
+	m_scenes.push_back(cellScene);
+
 	m_currScene = menuScene;
 
 	std::cout << "Current scene is " << m_currScene->GetName() << std::endl << std::endl;

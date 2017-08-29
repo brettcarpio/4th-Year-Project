@@ -90,6 +90,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Classes\src\CellScene.cpp" />
     <ClCompile Include="Classes\src\Game.cpp" />
     <ClCompile Include="Classes\src\DungeonScene.cpp" />
     <ClCompile Include="Classes\src\SceneManager.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Classes\include\CellScene.h" />
     <ClInclude Include="Classes\include\Game.h" />
     <ClInclude Include="Classes\include\GrammarSystem.h" />
     <ClInclude Include="Classes\include\DungeonScene.h" />

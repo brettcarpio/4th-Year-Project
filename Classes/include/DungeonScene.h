@@ -25,12 +25,15 @@ public:
 	void Update(sf::Time dt);
 	void Render(sf::RenderWindow & window);
 	void HandleInput(sf::Event e);
+	void Start();
+	void Stop();
 
 private:
 	void SetupGraph();
 	void SetupGrammar();
 	void RenderDungeon();
 	void ClearDrawables();
+	void RestartScene();
 	void CreateRoom(Node* node, Node* parent);
 	void SetNodeData(Node* node, Node* parent);
 

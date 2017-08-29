@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "MenuScene.h"
 #include "DungeonScene.h"
+#include "CellScene.h"
 
 #include "SFML/System/Time.hpp"
 #include <vector>
@@ -25,8 +26,6 @@ public:
 private:
 	Scene* m_currScene;
 	std::vector<Scene*> m_scenes;
-
-	MenuScene* m_menuScene;
 };
 
 #endif // !SCENEMANAGER_H

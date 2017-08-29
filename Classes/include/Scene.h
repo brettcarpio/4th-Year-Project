@@ -16,9 +16,8 @@ public:
 	virtual void Render(sf::RenderWindow & window) = 0;
 	virtual void HandleInput(sf::Event e) = 0;
 
-	virtual void Start() { m_alive = true; }
-	virtual void Stop() { m_alive = false; m_switchingScene = sceneswitch(false, ""); }
-
+	virtual void Start() = 0;
+	virtual void Stop() = 0;
 	
 	bool IsAlive() { return m_alive; }
 	std::string GetName() { return m_name; }

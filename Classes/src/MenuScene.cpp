@@ -32,3 +32,13 @@ void MenuScene::HandleInput(sf::Event e)
 	}
 }
 
+void MenuScene::Start()
+{
+	m_alive = true;
+}
+
+void MenuScene::Stop()
+{
+	m_alive = false;
+	m_switchingScene = sceneswitch(false, "");
+}

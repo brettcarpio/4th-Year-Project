@@ -8,11 +8,7 @@ DungeonScene::DungeonScene(sf::RenderWindow& window) : Scene("DungeonScene", fal
 
 DungeonScene::~DungeonScene()
 {
-	ClearDrawables();
-	delete m_graph;
-	m_graph = nullptr;
-	delete m_translatedGraph;
-	m_translatedGraph = nullptr;
+	RestartScene();
 }
 
 void DungeonScene::Update(sf::Time dt)
@@ -31,11 +27,29 @@ void DungeonScene::HandleInput(sf::Event e)
 	{
 		m_switchingScene = sceneswitch(true, "MenuScene");
 	}
-	if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
+	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num3))
+	{
+		m_switchingScene = sceneswitch(true, "CellScene");
+	}
+	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
 	{
 		ClearDrawables();
 		RenderDungeon();
 	}
+}
+
+void DungeonScene::Start()
+{
+	m_alive = true;
+	SetupGraph();
+	SetupGrammar();
+}
+
+void DungeonScene::Stop()
+{
+	m_alive = false; 
+	m_switchingScene = sceneswitch(false, "");
+	RestartScene();
 }
 
 void DungeonScene::ClearDrawables()
@@ -45,6 +59,15 @@ void DungeonScene::ClearDrawables()
 	{
 		m_rooms.erase(m_rooms.begin());
 	}
+	delete m_translatedGraph;
+	m_translatedGraph = nullptr;
+}
+
+void DungeonScene::RestartScene()
+{
+	ClearDrawables();
+	delete m_graph;
+	m_graph = nullptr;
 	delete m_translatedGraph;
 	m_translatedGraph = nullptr;
 }
