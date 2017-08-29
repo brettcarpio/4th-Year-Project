@@ -66,13 +66,12 @@ public:
 		}
 	}
 
-	Graph<NodeType, ArcType>* Translate(Graph<NodeType, ArcType> *graph)
+	void Translate(Graph<NodeType, ArcType> *graph)
 	{
-		Graph<NodeType, ArcType> *newGraph = graph;
 		std::queue<Node*> nodeQueue;
-		for (int i = 0; i < newGraph->m_nodes.size(); i++)
+		for (int i = 0; i < graph->m_nodes.size(); i++)
 		{
-			nodeQueue.push(newGraph->m_nodes.at(i));
+			nodeQueue.push(graph->m_nodes.at(i));
 		}
 		
 		while (nodeQueue.size() != 0)
@@ -85,22 +84,22 @@ public:
 				{
 					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_name);
 
-					Node* previous = current->m_arcList.front().m_node;
-					Node* following = current->m_arcList.back().m_node;
+					Node* previousNode = current->m_arcList.front().m_node;
+					Node* followingNode = current->m_arcList.back().m_node;
 
-					ArcType prevToCurr = previous->GetArc(current)->m_weight;
-					ArcType follToCurr = following->GetArc(current)->m_weight;
+					ArcType prevToCurr = previousNode->GetArc(current)->m_weight;
+					ArcType follToCurr = followingNode->GetArc(current)->m_weight;
 
-					ArcType currToPrev = current->GetArc(previous)->m_weight;
-					ArcType currToFoll = current->GetArc(following)->m_weight;
+					ArcType currToPrev = current->GetArc(previousNode)->m_weight;
+					ArcType currToFoll = current->GetArc(followingNode)->m_weight;
 
-					previous->RemoveArc(current);
-					following->RemoveArc(current);
+					previousNode->RemoveArc(current);
+					followingNode->RemoveArc(current);
 
-					std::vector<Node*>::iterator it = std::find(newGraph->m_nodes.begin(), newGraph->m_nodes.end(), current);
-					newGraph->RemoveNode(std::distance(newGraph->m_nodes.begin(), it));
+					std::vector<Node*>::iterator it = std::find(graph->m_nodes.begin(), graph->m_nodes.end(), current);
+					graph->RemoveNode(std::distance(graph->m_nodes.begin(), it));
 
-					newGraph->AddGraph(replacementGraph, previous, following, prevToCurr, follToCurr, currToPrev, currToFoll);
+					graph->AddGraph(replacementGraph, previousNode, followingNode, prevToCurr, follToCurr, currToPrev, currToFoll);
 					
 					break;
 				}
@@ -108,7 +107,6 @@ public:
 			
 			nodeQueue.pop();
 		}
-		return newGraph;
 	}
 
 private:

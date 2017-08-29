@@ -124,7 +124,7 @@ public:
 		}
 
 		previous->AddArc(temp.front(), prevToCurr);
-		following->AddArc(temp.back(), follToCurr);
+		following->AddArcFromFront(temp.back(), follToCurr);
 
 		temp.front()->AddArc(previous, currToPrev);
 		temp.back()->AddArc(following, currToFoll);

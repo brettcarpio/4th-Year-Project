@@ -44,6 +44,14 @@ public:
 		m_arcList.push_back(a);
 	}
 
+	void AddArcFromFront(Node* node, ArcType weight)
+	{
+		Arc a;
+		a.m_node = node;
+		a.m_weight = weight;
+		m_arcList.insert(m_arcList.begin(), a);
+	}
+
 	void RemoveArc(Node* p_node)
 	{
 		std::list<Arc>::iterator itr = m_arcList.begin();

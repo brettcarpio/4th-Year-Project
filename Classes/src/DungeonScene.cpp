@@ -40,15 +40,19 @@ void DungeonScene::HandleInput(sf::Event e)
 
 void DungeonScene::ClearDrawables()
 {
-	for (int i = 0; i < m_rooms.size(); i++)
+	int roomSize = m_rooms.size();
+	for (int i = 0; i < roomSize; i++)
 	{
-		m_rooms.erase(m_rooms.begin() + i);
+		m_rooms.erase(m_rooms.begin());
 	}
+	delete m_translatedGraph;
+	m_translatedGraph = nullptr;
 }
 
 void DungeonScene::RenderDungeon()
 {
-	m_translatedGraph = m_grammar.Translate(m_graph);
+	m_translatedGraph = new Graph<Room, std::string>(*m_graph);
+	m_grammar.Translate(m_translatedGraph);
 	
 	std::queue<Node*> nodeQueue;
 	Node* start = m_translatedGraph->m_nodes.front();
@@ -61,7 +65,7 @@ void DungeonScene::RenderDungeon()
 	start->m_data.m_dir = direction[rand() % stringLength];
 	start->m_data.m_tex.loadFromFile("Assets/DungeonScene/Assets/" + start->m_name + start->m_data.m_dir + ".png");
 	start->m_data.m_sprite.setTexture(start->m_data.m_tex);
-	start->m_data.m_sprite.setPosition(sf::Vector2f(400, 200));
+	start->m_data.m_sprite.setPosition(sf::Vector2f(400, 250));
 
 	m_rooms.push_back(start);
 
@@ -73,74 +77,77 @@ void DungeonScene::RenderDungeon()
 		for (; iter != endIter; iter++) {
 			if ((*iter).m_node->m_marked == false) {
 				// mark the node and add it to the queue.
-				(*iter).m_node->m_marked = true;
+				//(*iter).m_node->m_marked = true;
 				CreateRoom((*iter).m_node, nodeQueue.front());
 				nodeQueue.push((*iter).m_node);
 			}
 		}
 
+		nodeQueue.front()->m_marked = true;
 		nodeQueue.pop();
 	}
 }
 
 void DungeonScene::CreateRoom(Node * node, Node* parent)
 {
-	if (parent->m_name == "frk")
-	{
-		if (parent->m_data.m_dir == 'U')
-		{
-			parent->m_data.m_out.push('L');
-			parent->m_data.m_out.push('R');
-		}
-		else if (parent->m_data.m_dir == 'R')
-		{
-			parent->m_data.m_out.push('U');
-			parent->m_data.m_out.push('D');
-		}
-		else if (parent->m_data.m_dir == 'D')
-		{
-			parent->m_data.m_out.push('R');
-			parent->m_data.m_out.push('L');
-		}
-		else if (parent->m_data.m_dir == 'L')
-		{
-			parent->m_data.m_out.push('D');
-			parent->m_data.m_out.push('U');
-		}
-	}
-	else if (parent->m_name == "cr")
-	{
-		if (parent->m_data.m_dir == 'U')
-		{
-			parent->m_data.m_out.push('R');
-			parent->m_data.m_out.push('L');
-			parent->m_data.m_out.push('D');
-		}
-		else if (parent->m_data.m_dir == 'R')
-		{
-			parent->m_data.m_out.push('D');
-			parent->m_data.m_out.push('U');
-			parent->m_data.m_out.push('L');
-
-		}
-		else if (parent->m_data.m_dir == 'D')
-		{
-			parent->m_data.m_out.push('L');
-			parent->m_data.m_out.push('R');
-			parent->m_data.m_out.push('U');
-		}
-		else if (parent->m_data.m_dir == 'L')
-		{
-			parent->m_data.m_out.push('U');
-			parent->m_data.m_out.push('D');
-			parent->m_data.m_out.push('R');
-		}
-	}
-
-	if (parent != nullptr) 
+	if (parent != nullptr)
 	{
 		SetNodeData(node, parent);
 	}
+
+	if (node->m_name == "frk")
+	{
+		if (node->m_data.m_dir == 'U')
+		{
+			node->m_data.m_out.push('L');
+			node->m_data.m_out.push('R');
+		}
+		else if (node->m_data.m_dir == 'R')
+		{
+			node->m_data.m_out.push('D');
+			node->m_data.m_out.push('U');
+		}
+		else if (node->m_data.m_dir == 'D')
+		{
+			node->m_data.m_out.push('L');
+			node->m_data.m_out.push('R');
+		}
+		else if (node->m_data.m_dir == 'L')
+		{
+			node->m_data.m_out.push('U');
+			node->m_data.m_out.push('D');
+		}
+	}
+	else if (node->m_name == "cr")
+	{
+		if (node->m_data.m_dir == 'U')
+		{
+			node->m_data.m_out.push('L');
+			node->m_data.m_out.push('U');
+			node->m_data.m_out.push('R');
+		}
+		else if (node->m_data.m_dir == 'R')
+		{
+			node->m_data.m_out.push('D');
+			node->m_data.m_out.push('R');
+			node->m_data.m_out.push('U');
+
+		}
+		else if (node->m_data.m_dir == 'D')
+		{
+			node->m_data.m_out.push('R');
+			node->m_data.m_out.push('D');
+			node->m_data.m_out.push('L');
+		}
+		else if (node->m_data.m_dir == 'L')
+		{
+			node->m_data.m_out.push('D');
+			node->m_data.m_out.push('L');
+			node->m_data.m_out.push('U');
+		}
+	}
+
+	
 
 	m_rooms.push_back(node);
 }
@@ -171,11 +178,11 @@ void DungeonScene::SetNodeData(Node * node, Node * parent)
 		if (parent->m_data.m_dir == 'U')
 			node->m_data.m_dir = 'R';
 		else if (parent->m_data.m_dir == 'R')
-			node->m_data.m_dir = 'U';
+			node->m_data.m_dir = 'D';
 		else if (parent->m_data.m_dir == 'D')
 			node->m_data.m_dir = 'L';
 		else if (parent->m_data.m_dir == 'L')
-			node->m_data.m_dir = 'D';
+			node->m_data.m_dir = 'U';
 
 		node->m_data.m_tex.loadFromFile("Assets/DungeonScene/Assets/" + node->m_name + node->m_data.m_dir + ".png");
 		node->m_data.m_sprite.setTexture(node->m_data.m_tex);
@@ -198,13 +205,13 @@ void DungeonScene::SetNodeData(Node * node, Node * parent)
 	else if (parent->m_name == "sp")
 	{
 		if (parent->m_data.m_dir == 'U')
-			node->m_data.m_dir = 'D';
-		else if (parent->m_data.m_dir == 'R')
-			node->m_data.m_dir = 'L';
-		else if (parent->m_data.m_dir == 'D')
 			node->m_data.m_dir = 'U';
-		else if (parent->m_data.m_dir == 'L')
+		else if (parent->m_data.m_dir == 'R')
 			node->m_data.m_dir = 'R';
+		else if (parent->m_data.m_dir == 'D')
+			node->m_data.m_dir = 'D';
+		else if (parent->m_data.m_dir == 'L')
+			node->m_data.m_dir = 'L';
 
 		node->m_data.m_tex.loadFromFile("Assets/DungeonScene/Assets/" + node->m_name + node->m_data.m_dir + ".png");
 		node->m_data.m_sprite.setTexture(node->m_data.m_tex);
