@@ -3,7 +3,7 @@
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game() :
-	m_window(sf::VideoMode(1400, 800, 32), "Dungeon Generator")
+	m_window(sf::VideoMode(1440, 800, 32), "Dungeon Generator")
 {
 	m_scnMgr = new SceneManager(m_window);
 }

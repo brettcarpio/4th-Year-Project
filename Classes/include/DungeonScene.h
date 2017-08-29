@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "GrammarSystem.h"
 #include "Graph.h"
+#include "Grid.h"
 
 #include <fstream>
 
@@ -43,6 +44,7 @@ private:
 	Graph<Room, std::string>* m_translatedGraph;
 
 	std::vector<Node*> m_rooms;
+	Grid m_grid;
 };
 
 #endif // !DUNGEON_SCENE_H

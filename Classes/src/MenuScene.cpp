@@ -30,6 +30,10 @@ void MenuScene::HandleInput(sf::Event e)
 	{
 		m_switchingScene = sceneswitch(true, "DungeonScene");
 	}
+	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num3))
+	{
+		m_switchingScene = sceneswitch(true, "CellScene");
+	}
 }
 
 void MenuScene::Start()

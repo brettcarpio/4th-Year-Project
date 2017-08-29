@@ -4,10 +4,12 @@
 #include "Scene.h"
 #include "GrammarSystem.h"
 #include "Graph.h"
+#include "Grid.h"
 
 #include <fstream>
 
 class CellScene : public Scene {
+
 public:
 	typedef GraphArc<int, std::string> Arc;
 	typedef GraphNode<int, std::string> Node;
@@ -29,6 +31,7 @@ private:
 	GrammarSystem<int, std::string> m_grammar;
 	Graph<int, std::string>* m_graph;
 	Graph<int, std::string>* m_translatedGraph;
+	Grid m_grid;
 
 };
 

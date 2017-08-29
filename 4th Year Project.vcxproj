@@ -93,8 +93,10 @@
     <ClCompile Include="Classes\src\CellScene.cpp" />
     <ClCompile Include="Classes\src\Game.cpp" />
     <ClCompile Include="Classes\src\DungeonScene.cpp" />
+    <ClCompile Include="Classes\src\Grid.cpp" />
     <ClCompile Include="Classes\src\SceneManager.cpp" />
     <ClCompile Include="Classes\src\MenuScene.cpp" />
+    <ClCompile Include="Classes\src\Tile.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,11 +107,16 @@
     <ClInclude Include="Classes\include\Graph.h" />
     <ClInclude Include="Classes\include\GraphArc.h" />
     <ClInclude Include="Classes\include\GraphNode.h" />
+    <ClInclude Include="Classes\include\Grid.h" />
     <ClInclude Include="Classes\include\MenuScene.h" />
     <ClInclude Include="Classes\include\Scene.h" />
     <ClInclude Include="Classes\include\SceneManager.h" />
+    <ClInclude Include="Classes\include\Tile.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Assets\CellScene\Graph\arcs.txt" />
+    <Text Include="Assets\CellScene\Graph\nodes.txt" />
+    <Text Include="Assets\CellScene\Graph\rules.txt" />
     <Text Include="Assets\DungeonScene\Graph\arcs.txt" />
     <Text Include="Assets\DungeonScene\Graph\nodes.txt" />
     <Text Include="Assets\DungeonScene\Graph\rules.txt" />

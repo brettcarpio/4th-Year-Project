@@ -47,7 +47,7 @@ public:
 			}
 
 			Graph<NodeType, ArcType> ruleGraph = Graph<NodeType, ArcType>();
-			NodeType type;
+			NodeType type = NodeType();
 			std::istringstream ssNodes(ruleData[1]);
 			while (std::getline(ssNodes, line, ','))
 			{

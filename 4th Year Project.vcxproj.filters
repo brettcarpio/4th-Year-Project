@@ -39,6 +39,9 @@
     <Filter Include="Source Files\SceneManager\Scenes\CellScene">
       <UniqueIdentifier>{4a9b21da-e2fb-4b72-850a-0f84a5bac6b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SceneManager\Scenes\CellScene\Data">
+      <UniqueIdentifier>{dd48edc9-231e-4255-84b0-196fb4dfa8ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +61,12 @@
     </ClCompile>
     <ClCompile Include="Classes\src\CellScene.cpp">
       <Filter>Source Files\SceneManager\Scenes\CellScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\Tile.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\src\Grid.cpp">
+      <Filter>Source Files\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +100,12 @@
     <ClInclude Include="Classes\include\CellScene.h">
       <Filter>Source Files\SceneManager\Scenes\CellScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\include\Tile.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\include\Grid.h">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Assets\DungeonScene\Graph\arcs.txt">
@@ -101,6 +116,15 @@
     </Text>
     <Text Include="Assets\DungeonScene\Graph\rules.txt">
       <Filter>Source Files\SceneManager\Scenes\DungeonScene\Data</Filter>
+    </Text>
+    <Text Include="Assets\CellScene\Graph\arcs.txt">
+      <Filter>Source Files\SceneManager\Scenes\CellScene\Data</Filter>
+    </Text>
+    <Text Include="Assets\CellScene\Graph\nodes.txt">
+      <Filter>Source Files\SceneManager\Scenes\CellScene\Data</Filter>
+    </Text>
+    <Text Include="Assets\CellScene\Graph\rules.txt">
+      <Filter>Source Files\SceneManager\Scenes\CellScene\Data</Filter>
     </Text>
   </ItemGroup>
 </Project>

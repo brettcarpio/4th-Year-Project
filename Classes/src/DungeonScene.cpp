@@ -4,6 +4,7 @@ DungeonScene::DungeonScene(sf::RenderWindow& window) : Scene("DungeonScene", fal
 {
 	SetupGraph();
 	SetupGrammar();
+	m_grid = Grid(sf::Vector2f(16, 16), sf::Vector2f(window.getSize()));
 }
 
 DungeonScene::~DungeonScene()
@@ -19,6 +20,8 @@ void DungeonScene::Render(sf::RenderWindow & window)
 {
 	for (Node* r : m_rooms)
 		window.draw(r->m_data.m_sprite);
+
+	m_grid.Render(window);
 }
 
 void DungeonScene::HandleInput(sf::Event e)
@@ -30,6 +33,13 @@ void DungeonScene::HandleInput(sf::Event e)
 	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num3))
 	{
 		m_switchingScene = sceneswitch(true, "CellScene");
+	}
+	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::G))
+	{
+		if (m_grid.IsVisible())
+			m_grid.SetVisible(false);
+		else
+			m_grid.SetVisible(true);
 	}
 	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
 	{
@@ -70,6 +80,7 @@ void DungeonScene::RestartScene()
 	m_graph = nullptr;
 	delete m_translatedGraph;
 	m_translatedGraph = nullptr;
+	m_grid.SetVisible(false);
 }
 
 void DungeonScene::RenderDungeon()
@@ -88,7 +99,7 @@ void DungeonScene::RenderDungeon()
 	start->m_data.m_dir = direction[rand() % stringLength];
 	start->m_data.m_tex.loadFromFile("Assets/DungeonScene/Assets/" + start->m_name + start->m_data.m_dir + ".png");
 	start->m_data.m_sprite.setTexture(start->m_data.m_tex);
-	start->m_data.m_sprite.setPosition(sf::Vector2f(400, 250));
+	start->m_data.m_sprite.setPosition(sf::Vector2f(400, 256));
 
 	m_rooms.push_back(start);
 
