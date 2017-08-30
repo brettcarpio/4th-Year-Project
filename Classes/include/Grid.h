@@ -8,12 +8,15 @@
 class Grid {
 public:
 	Grid();
-	Grid(sf::Vector2f tileSize, sf::Vector2f windowSize);
+	Grid(sf::Vector2f tileSize, sf::Vector2f startPos, int numberOfRows, int numberOfCols);
 	~Grid();
 
 	void Render(sf::RenderWindow & window);
-	bool IsVisible();
+	bool IsVisible() const;
 	void SetVisible(bool value);
+	int GetNumberOfRows() const;
+	int GetNumberOfCols() const;
+	std::vector<std::vector<Tile>> & GetTiles();
 
 private:
 	std::vector<std::vector<Tile>> m_tiles;

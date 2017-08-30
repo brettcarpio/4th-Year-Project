@@ -4,18 +4,17 @@ Grid::Grid()
 {
 }
 
-Grid::Grid(sf::Vector2f tileSize, sf::Vector2f windowSize)
+Grid::Grid(sf::Vector2f tileSize, sf::Vector2f startPos, int numberOfRows, int numberOfCols)
 {
-	m_visible = false;
-	m_numberOfRows = windowSize.x / tileSize.x;
-	m_numberOfCols = windowSize.y / tileSize.y;
+	m_visible = true;
+	m_numberOfRows = numberOfRows;
+	m_numberOfCols = numberOfCols;
 
-	float xPos = 0;
-
+	int xPos = startPos.x;
 	for (int i = 0; i < m_numberOfRows; i++)
 	{
 		std::vector<Tile> row;
-		float yPos = 0;
+		int yPos = startPos.y;
 		for (int j = 0; j < m_numberOfCols; j++) {
 			Tile tile(sf::Vector2f(xPos, yPos), tileSize);
 			row.push_back(tile);
@@ -43,7 +42,7 @@ void Grid::Render(sf::RenderWindow & window)
 	}
 }
 
-bool Grid::IsVisible()
+bool Grid::IsVisible() const
 {
 	return m_visible;
 }
@@ -51,4 +50,19 @@ bool Grid::IsVisible()
 void Grid::SetVisible(bool value)
 {
 	m_visible = value;
+}
+
+int Grid::GetNumberOfRows() const
+{
+	return m_numberOfRows;
+}
+
+int Grid::GetNumberOfCols() const
+{
+	return m_numberOfCols;
+}
+
+std::vector<std::vector<Tile>> & Grid::GetTiles()
+{
+	return m_tiles;
 }

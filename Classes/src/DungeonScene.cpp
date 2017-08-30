@@ -4,7 +4,7 @@ DungeonScene::DungeonScene(sf::RenderWindow& window) : Scene("DungeonScene", fal
 {
 	SetupGraph();
 	SetupGrammar();
-	m_grid = Grid(sf::Vector2f(16, 16), sf::Vector2f(window.getSize()));
+	m_grid = Grid(sf::Vector2f(16, 16), sf::Vector2f(0, 0), (window.getSize().x / 16), (window.getSize().y / 16));
 }
 
 DungeonScene::~DungeonScene()
@@ -80,7 +80,6 @@ void DungeonScene::RestartScene()
 	m_graph = nullptr;
 	delete m_translatedGraph;
 	m_translatedGraph = nullptr;
-	m_grid.SetVisible(false);
 }
 
 void DungeonScene::RenderDungeon()

@@ -26,12 +26,23 @@ public:
 private:
 	void SetupGraph();
 	void SetupGrammar();
+	void RenderDungeon();
+	void ClearDrawables();
+
+	void CreateGrid(Grid &g);
+	void EvolveMap(Grid &g);
+	bool PlaceWallLogic(Grid &g, int row, int col);
+	int GetSurroundingWalls(Grid &g, int row, int col);
+	bool IsWall(Grid &g, int row, int col);
+	bool IsOutOfBound(Grid &g, int row, int col);
 
 private:
 	GrammarSystem<int, std::string> m_grammar;
 	Graph<int, std::string>* m_graph;
 	Graph<int, std::string>* m_translatedGraph;
 	Grid m_grid;
+
+	std::vector<Grid> m_grids;
 
 };
 
