@@ -25,6 +25,27 @@ Grid::Grid(sf::Vector2f tileSize, sf::Vector2f startPos, int numberOfRows, int n
 	}
 }
 
+Grid::Grid(sf::Texture * tex, sf::Vector2f startPos, int numberOfRows, int numberOfCols)
+{
+	m_visible = true;
+	m_numberOfRows = numberOfRows;
+	m_numberOfCols = numberOfCols;
+
+	int xPos = startPos.x;
+	for (int i = 0; i < m_numberOfRows; i++)
+	{
+		std::vector<Tile> row;
+		int yPos = startPos.y;
+		for (int j = 0; j < m_numberOfCols; j++) {
+			Tile tile(sf::Vector2f(xPos, yPos), tex);
+			row.push_back(tile);
+			yPos += tex->getSize().y;
+		}
+		m_tiles.push_back(row);
+		xPos += tex->getSize().x;
+	}
+}
+
 Grid::~Grid()
 {
 }

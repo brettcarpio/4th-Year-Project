@@ -34,13 +34,6 @@ void DungeonScene::HandleInput(sf::Event e)
 	{
 		m_switchingScene = sceneswitch(true, "CellScene");
 	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::G))
-	{
-		if (m_grid.IsVisible())
-			m_grid.SetVisible(false);
-		else
-			m_grid.SetVisible(true);
-	}
 	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
 	{
 		ClearDrawables();
@@ -85,7 +78,7 @@ void DungeonScene::RestartScene()
 void DungeonScene::RenderDungeon()
 {
 	m_translatedGraph = new Graph<Room, std::string>(*m_graph);
-	m_grammar.Translate(m_translatedGraph);
+	m_grammar.Translate(m_translatedGraph, LoadRules());
 	
 	std::queue<Node*> nodeQueue;
 	Node* start = m_translatedGraph->m_nodes.front();
@@ -258,6 +251,14 @@ void DungeonScene::SetNodeData(Node * node, Node * parent)
 		node->m_data.m_sprite.setPosition(parent->m_data.m_sprite.getPosition() + up);
 	else if (node->m_data.m_dir == 'L')
 		node->m_data.m_sprite.setPosition(parent->m_data.m_sprite.getPosition() + right);
+}
+
+std::vector<std::pair<std::string, Room>> DungeonScene::LoadRules()
+{
+	std::vector<std::pair<std::string, Room>> rules;
+	std::queue<std::string> ruleID;
+
+	return rules;
 }
 
 

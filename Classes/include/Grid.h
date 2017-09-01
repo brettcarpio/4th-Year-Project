@@ -9,6 +9,7 @@ class Grid {
 public:
 	Grid();
 	Grid(sf::Vector2f tileSize, sf::Vector2f startPos, int numberOfRows, int numberOfCols);
+	Grid(sf::Texture* tex, sf::Vector2f startPos, int numberOfRows, int numberOfCols);
 	~Grid();
 
 	void Render(sf::RenderWindow & window);

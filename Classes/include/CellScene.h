@@ -8,11 +8,19 @@
 
 #include <fstream>
 
-class CellScene : public Scene {
+struct Cave
+{
+	sf::Texture m_tex;
+	sf::Vector2f m_position;
+	std::string m_rule;
+	int m_exitPos;
+	int m_chance;
+};
 
+class CellScene : public Scene {
 public:
-	typedef GraphArc<int, std::string> Arc;
-	typedef GraphNode<int, std::string> Node;
+	typedef GraphArc<Cave, std::string> Arc;
+	typedef GraphNode<Cave, std::string> Node;
 
 	CellScene(sf::RenderWindow& window);
 	~CellScene();
@@ -24,25 +32,31 @@ public:
 	void Stop();
 
 private:
+	std::vector<std::pair<std::string, Cave>> LoadRules();
 	void SetupGraph();
 	void SetupGrammar();
 	void RenderDungeon();
 	void ClearDrawables();
+	void RestartScene();
 
-	void CreateGrid(Grid &g);
-	void EvolveMap(Grid &g);
-	bool PlaceWallLogic(Grid &g, int row, int col);
-	int GetSurroundingWalls(Grid &g, int row, int col);
+	void LoadTextures();
+	void CreateRoom(Node* node, Node* parent, int count);
+	void CreateExits(Node* node, Node* parent, Grid &g);
+	void RandomFill(Grid &g, const int chance);
+	void EvolveMap(Grid &g, std::string rule);
+	bool PlaceWallLogic(Grid &g, int row, int col, std::string rule);
+	int GetSurroundingWalls(Grid &g, int row, int col, int scopeX, int scopeY);
 	bool IsWall(Grid &g, int row, int col);
 	bool IsOutOfBound(Grid &g, int row, int col);
 
 private:
-	GrammarSystem<int, std::string> m_grammar;
-	Graph<int, std::string>* m_graph;
-	Graph<int, std::string>* m_translatedGraph;
+	GrammarSystem<Cave, std::string> m_grammar;
+	Graph<Cave, std::string>* m_graph;
+	Graph<Cave, std::string>* m_translatedGraph;
 	Grid m_grid;
 
 	std::vector<Grid> m_grids;
+	std::vector<sf::Texture*> m_textures;
 
 };
 

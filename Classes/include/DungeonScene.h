@@ -8,7 +8,6 @@
 
 #include <fstream>
 
-class DungeonScene : public Scene {
 struct Room
 {
 	sf::Texture m_tex;
@@ -16,6 +15,8 @@ struct Room
 	char m_dir;
 	std::queue<char> m_out;
 };
+
+class DungeonScene : public Scene {
 public:
 	typedef GraphArc<Room, std::string> Arc;
 	typedef GraphNode<Room, std::string> Node;
@@ -37,6 +38,7 @@ private:
 	void RestartScene();
 	void CreateRoom(Node* node, Node* parent);
 	void SetNodeData(Node* node, Node* parent);
+	std::vector<std::pair<std::string, Room>> LoadRules();
 
 private:
 	GrammarSystem<Room, std::string> m_grammar;

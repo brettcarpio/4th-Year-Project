@@ -35,6 +35,7 @@ public:
 		file.close();
 
 		m_rules.reserve(data.size());
+
 		for (int i = 0; i < data.size(); i++)
 		{
 			std::istringstream ss(data[i]);
@@ -66,13 +67,14 @@ public:
 		}
 	}
 
-	void Translate(Graph<NodeType, ArcType> *graph)
+	void Translate(Graph<NodeType, ArcType> *graph, std::vector<std::pair<std::string, NodeType>> ruleData)
 	{
 		std::queue<Node*> nodeQueue;
 		for (int i = 0; i < graph->m_nodes.size(); i++)
 		{
 			nodeQueue.push(graph->m_nodes.at(i));
 		}
+		FillOriginalGraphData(graph, ruleData);
 		
 		while (nodeQueue.size() != 0)
 		{
@@ -83,6 +85,7 @@ public:
 				if (isupper(c))
 				{
 					Graph<NodeType, ArcType> replacementGraph = SearchForRule(current->m_name);
+					FillOriginalGraphData(&replacementGraph, ruleData);
 
 					Node* previousNode = current->m_arcList.front().m_node;
 					Node* followingNode = current->m_arcList.back().m_node;
@@ -136,6 +139,48 @@ private:
 		{
 			int i = rand() % m_rules.size();
 			return rules.at(i);
+		}
+	}
+
+	void FillOriginalGraphData(Graph<NodeType, ArcType> *g, std::vector<std::pair<std::string, NodeType>> ruleData)
+	{
+		std::queue<Node*> nodeQueue;
+		for (int i = 0; i < g->m_nodes.size(); i++)
+		{
+			nodeQueue.push(g->m_nodes.at(i));
+		}
+
+		while (!nodeQueue.empty())
+		{
+			for (std::vector<std::pair<std::string, NodeType>>::iterator it = ruleData.begin(); it != ruleData.end(); ++it)
+			{
+				if (it->first == nodeQueue.front()->m_name)
+				{
+					nodeQueue.front()->m_data = it->second;
+				}
+			}
+			nodeQueue.pop();
+		}
+	}
+
+	Graph<NodeType, ArcType> FillRuleGraphData(Graph<NodeType, ArcType> g, std::vector<std::pair<std::string, NodeType>> ruleData)
+	{
+		std::queue<Node> nodeQueue;
+		for (int i = 0; i < g.m_nodes.size(); i++)
+		{
+			nodeQueue.push(g.m_nodes[i]);
+		}
+
+		while (!nodeQueue.empty())
+		{
+			for (std::vector<std::pair<std::string, NodeType>>::iterator it = ruleData.begin(); it != ruleData.end(); ++it)
+			{
+				if (it->first == nodeQueue.front().m_name)
+				{
+					nodeQueue.front().m_data = it->second;
+				}
+			}
+			nodeQueue.pop();
 		}
 	}
 };

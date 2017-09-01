@@ -7,6 +7,7 @@ Tile::Tile()
 Tile::Tile(sf::Vector2f position, sf::Vector2f size)
 {
 	m_filled = false;
+	m_hasSprite = false;
 	m_pos = position;
 	m_rect = sf::RectangleShape(size);
 	m_rect.setFillColor(sf::Color::Transparent);
@@ -15,13 +16,25 @@ Tile::Tile(sf::Vector2f position, sf::Vector2f size)
 	m_rect.setPosition(m_pos);
 }
 
+Tile::Tile(sf::Vector2f position, sf::Texture * tex)
+{
+	m_filled = false;
+	m_hasSprite = true;
+	m_pos = position;
+	m_sprite.setTexture(*tex);
+	m_sprite.setPosition(m_pos);
+}
+
 Tile::~Tile()
 {
 }
 
 void Tile::Render(sf::RenderWindow & window)
 {
-	window.draw(m_rect);
+	if (m_hasSprite && m_filled)
+		window.draw(m_sprite);
+	else
+		window.draw(m_rect);
 }
 
 sf::RectangleShape Tile::GetRect()
