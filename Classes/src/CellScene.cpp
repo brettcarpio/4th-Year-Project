@@ -4,8 +4,33 @@ CellScene::CellScene(sf::RenderWindow & window) : Scene("CellScene", false, scen
 {
 	SetupGraph();
 	SetupGrammar();
-	LoadTextures();
 	m_grid = Grid(sf::Vector2f(12, 12), sf::Vector2f(0, 0), (window.getSize().x / 12), (window.getSize().y / 11));
+
+	if (!m_logoTexture.loadFromFile("Assets/CellScene/Assets/logo.png"))
+		std::cout << "logo not loaded!" << std::endl;
+	if (!m_dungeonBtnTex.loadFromFile("Assets/CellScene/Assets/Dungeon_btn.png"))
+		std::cout << "C.A button not loaded!" << std::endl;
+	if (!m_mainBtnTex.loadFromFile("Assets/CellScene/Assets/main_btn.png"))
+		std::cout << "main button not loaded!" << std::endl;
+	if (!m_generateBtnTex.loadFromFile("Assets/CellScene/Assets/generate.png"))
+		std::cout << "generate button not loaded!" << std::endl;
+
+	m_mainBtn.setTexture(m_mainBtnTex);
+	m_mainBtn.setPosition(window.getSize().x - 350, 550);
+
+	m_dungeonBtn.setTexture(m_dungeonBtnTex);
+	m_dungeonBtn.setPosition(window.getSize().x - 350, 650);
+
+	m_logo.setTexture(m_logoTexture);
+	m_logo.setPosition(m_mainBtn.getPosition().x - 50, 25);
+
+	m_generateBtn.setTexture(m_generateBtnTex);
+	m_generateBtn.setPosition(window.getSize().x - 350, 250);
+
+	m_sprites.push_back(m_logo);
+	m_sprites.push_back(m_mainBtn);
+	m_sprites.push_back(m_generateBtn);
+	m_sprites.push_back(m_dungeonBtn);
 }
 
 CellScene::~CellScene()
@@ -21,27 +46,35 @@ void CellScene::Render(sf::RenderWindow & window)
 {
 	for (Grid g : m_grids)
 		g.Render(window);
+	for (sf::Sprite s : m_sprites)
+		window.draw(s);
 	m_grid.Render(window);
+	mousepos = sf::Mouse::getPosition(window);
 }
 
 void CellScene::HandleInput(sf::Event e)
 {
-	if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num1))
+	if (mousepos.x >= (m_mainBtn.getPosition().x) &&
+		mousepos.x <= (m_mainBtn.getPosition().x + m_mainBtnTex.getSize().x) &&
+		mousepos.y >= (m_mainBtn.getPosition().y) &&
+		mousepos.y <= (m_mainBtn.getPosition().y + m_mainBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		m_switchingScene = sceneswitch(true, "MenuScene");
 	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num2))
+	if (mousepos.x >= (m_dungeonBtn.getPosition().x) &&
+		mousepos.x <= (m_dungeonBtn.getPosition().x + m_dungeonBtnTex.getSize().x) &&
+		mousepos.y >= (m_dungeonBtn.getPosition().y) &&
+		mousepos.y <= (m_dungeonBtn.getPosition().y + m_dungeonBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		m_switchingScene = sceneswitch(true, "DungeonScene");
 	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::G))
-	{
-		if (m_grid.IsVisible())
-			m_grid.SetVisible(false);
-		else
-			m_grid.SetVisible(true);
-	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
+	if (mousepos.x >= (m_generateBtn.getPosition().x) &&
+		mousepos.x <= (m_generateBtn.getPosition().x + m_generateBtnTex.getSize().x) &&
+		mousepos.y >= (m_generateBtn.getPosition().y) &&
+		mousepos.y <= (m_generateBtn.getPosition().y + m_generateBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		ClearDrawables();
 		RenderDungeon();
@@ -52,7 +85,6 @@ void CellScene::Start()
 {
 	m_alive = true;
 	SetupGraph();
-	SetupGrammar();
 }
 
 void CellScene::Stop()
@@ -69,15 +101,6 @@ void CellScene::RestartScene()
 	m_graph = nullptr;
 	delete m_translatedGraph;
 	m_translatedGraph = nullptr;
-	for (sf::Texture* t : m_textures)
-	{
-		delete t;
-		t = nullptr;
-	}
-	for (int i = 0; i < m_textures.size(); i++)
-	{
-		m_textures.erase(m_textures.begin());
-	}
 }
 
 std::vector<std::pair<std::string, Cave>> CellScene::LoadRules()
@@ -238,20 +261,6 @@ void CellScene::ClearDrawables()
 	}
 }
 
-void CellScene::LoadTextures()
-{
-	sf::Texture* e = new sf::Texture();
-	e->loadFromFile("Assets/CellScene/Assets/e.png");
-	sf::Texture* r = new sf::Texture();
-	r->loadFromFile("Assets/CellScene/Assets/r.png");
-	sf::Texture* b = new sf::Texture();
-	b->loadFromFile("Assets/CellScene/Assets/b.png");
-
-	m_textures.push_back(e);
-	m_textures.push_back(r);
-	m_textures.push_back(b);
-}
-
 void CellScene::CreateRoom(Node* node, Node* parent, int count)
 {
 	Grid grid;
@@ -265,7 +274,7 @@ void CellScene::CreateRoom(Node* node, Node* parent, int count)
 
 	if (node->m_name == "e")
 	{
-		grid = Grid(m_textures.at(0), node->m_data.m_position, rows, cols);
+		grid = Grid(sf::Vector2f(12,12), node->m_data.m_position, rows, cols);
 		RandomFill(grid, node->m_data.m_chance);
 	}
 	else
@@ -283,10 +292,7 @@ void CellScene::CreateRoom(Node* node, Node* parent, int count)
 			node->m_data.m_position = sf::Vector2f(parent->m_data.m_position.x, parent->m_data.m_position.y + offsetY);
 		}
 
-		if(node->m_name == "b")
-			grid = Grid(m_textures.at(2), node->m_data.m_position, rows, cols);
-		else
-			grid = Grid(m_textures.at(1), node->m_data.m_position, rows, cols);
+		grid = Grid(sf::Vector2f(12, 12), node->m_data.m_position, rows, cols);
 		RandomFill(grid, node->m_data.m_chance);
 	}
 

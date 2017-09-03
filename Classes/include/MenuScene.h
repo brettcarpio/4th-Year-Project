@@ -17,6 +17,12 @@ public:
 private:
 	sf::Texture m_logoTexture;
 	sf::Sprite m_logo;
+
+	sf::Texture m_dungeonBtnTex;
+	sf::Texture m_caveBtnTex;
+	sf::Sprite m_dungeonBtn;
+	sf::Sprite m_caveBtn;
+
 };
 
 #endif // !MENUSCENE_H

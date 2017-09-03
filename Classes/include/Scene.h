@@ -27,6 +27,8 @@ protected:
 	bool m_alive;
 	std::string	m_name;
 	sceneswitch m_switchingScene;
+	sf::Vector2i mousepos;
+	std::vector<sf::Sprite> m_sprites;
 
 };
 

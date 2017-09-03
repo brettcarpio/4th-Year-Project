@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>180</y>
+      <w>171</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>CellScene</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>180</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>DungeonScene</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>531</x>
+      <y>198</y>
+      <w>99</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1= 1</panel_attributes>
+    <additional_attributes>90.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>837</x>
+      <y>198</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1= 1..2</panel_attributes>
+    <additional_attributes>10.0;80.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>270</y>
+      <w>234</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Grid
+-
+- m_tiles : vector&lt;vector&lt;Tile&gt;&gt;
+- m_visible : bool
+- m_numberOfCols : int
+- m_numberOfRows : int
+-
++ Grid()
++ Grid( tileSize : sf::Vector2f, 
+startPos :  sf::Vector2f, 
+numberOfRows : int, 
+numberOfCols : int)
++ ~Grid()
++ Render( window : sf::RenderWindow )
++ IsVisible() : bool
++ SetVisible( value : bool )
++ GetNumberOfRows() : int
++ GetNumberOfCols() : int
++ GetTiles() : vector&lt;vector&lt;Tile&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>594</x>
+      <y>576</y>
+      <w>279</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>Tile
+-
+- m_tex : sf::Texture
+- m_sprite : sf::Sprite
+- m_rect : sf::RectangleShape
+- m_pos : sf::Vector2f
+- m_filled : bool
+- m_hasSprite : bool
+-
++ Tile()
++ Tile( position : sf::vector2f, size : sf::vector2f )
++ ~Tile()
++ Render( window : sf::RenderWindow )
++ GetRect() : sf::RectangleShape
++ GetPos() : sf::Vector2f
++ FillTile()
++ UnFillTile()
++ IsFilled() : bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>729</x>
+      <y>531</y>
+      <w>45</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1= 1..*</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

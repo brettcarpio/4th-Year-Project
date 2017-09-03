@@ -5,6 +5,33 @@ DungeonScene::DungeonScene(sf::RenderWindow& window) : Scene("DungeonScene", fal
 	SetupGraph();
 	SetupGrammar();
 	m_grid = Grid(sf::Vector2f(16, 16), sf::Vector2f(0, 0), (window.getSize().x / 16), (window.getSize().y / 16));
+
+	if (!m_logoTexture.loadFromFile("Assets/DungeonScene/Assets/logo.png"))
+		std::cout << "logo not loaded!" << std::endl;
+	if (!m_caveBtnTex.loadFromFile("Assets/DungeonScene/Assets/Cave_btn.png"))
+		std::cout << "C.A button not loaded!" << std::endl;
+	if (!m_mainBtnTex.loadFromFile("Assets/DungeonScene/Assets/main_btn.png"))
+		std::cout << "main button not loaded!" << std::endl;
+	if (!m_generateBtnTex.loadFromFile("Assets/DungeonScene/Assets/generate.png"))
+		std::cout << "generate button not loaded!" << std::endl;
+
+	m_mainBtn.setTexture(m_mainBtnTex);
+	m_mainBtn.setPosition(window.getSize().x - 350, 550);
+
+	m_caveBtn.setTexture(m_caveBtnTex);
+	m_caveBtn.setPosition(window.getSize().x - 350, 650);
+
+	m_logo.setTexture(m_logoTexture);
+	m_logo.setPosition(m_mainBtn.getPosition().x - 50, 25);
+
+	m_generateBtn.setTexture(m_generateBtnTex);
+	m_generateBtn.setPosition(window.getSize().x - 350, 250);
+
+	m_sprites.push_back(m_logo);
+	m_sprites.push_back(m_mainBtn);
+	m_sprites.push_back(m_generateBtn);
+	m_sprites.push_back(m_caveBtn);
+
 }
 
 DungeonScene::~DungeonScene()
@@ -14,6 +41,7 @@ DungeonScene::~DungeonScene()
 
 void DungeonScene::Update(sf::Time dt)
 {
+
 }
 
 void DungeonScene::Render(sf::RenderWindow & window)
@@ -21,20 +49,38 @@ void DungeonScene::Render(sf::RenderWindow & window)
 	for (Node* r : m_rooms)
 		window.draw(r->m_data.m_sprite);
 
+	for (sf::Sprite s : m_sprites)
+		window.draw(s);
+
 	m_grid.Render(window);
+	mousepos = sf::Mouse::getPosition(window);
+
+	
 }
 
 void DungeonScene::HandleInput(sf::Event e)
 {
-	if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num1))
+	if (mousepos.x >= (m_mainBtn.getPosition().x) &&
+		mousepos.x <= (m_mainBtn.getPosition().x + m_mainBtnTex.getSize().x) &&
+		mousepos.y >= (m_mainBtn.getPosition().y) &&
+		mousepos.y <= (m_mainBtn.getPosition().y + m_mainBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		m_switchingScene = sceneswitch(true, "MenuScene");
 	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Num3))
+	if (mousepos.x >= (m_caveBtn.getPosition().x) &&
+		mousepos.x <= (m_caveBtn.getPosition().x + m_caveBtnTex.getSize().x) &&
+		mousepos.y >= (m_caveBtn.getPosition().y) &&
+		mousepos.y <= (m_caveBtn.getPosition().y + m_caveBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		m_switchingScene = sceneswitch(true, "CellScene");
 	}
-	else if ((e.type == sf::Event::KeyPressed) && (e.key.code == sf::Keyboard::Space))
+	if (mousepos.x >= (m_generateBtn.getPosition().x) &&
+		mousepos.x <= (m_generateBtn.getPosition().x + m_generateBtnTex.getSize().x) &&
+		mousepos.y >= (m_generateBtn.getPosition().y) &&
+		mousepos.y <= (m_generateBtn.getPosition().y + m_generateBtnTex.getSize().y) &&
+		sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		ClearDrawables();
 		RenderDungeon();
@@ -45,7 +91,6 @@ void DungeonScene::Start()
 {
 	m_alive = true;
 	SetupGraph();
-	SetupGrammar();
 }
 
 void DungeonScene::Stop()
@@ -172,8 +217,6 @@ void DungeonScene::CreateRoom(Node * node, Node* parent)
 			node->m_data.m_out.push('U');
 		}
 	}
-
-	
 
 	m_rooms.push_back(node);
 }

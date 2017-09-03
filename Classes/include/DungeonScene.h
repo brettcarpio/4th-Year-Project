@@ -47,6 +47,17 @@ private:
 
 	std::vector<Node*> m_rooms;
 	Grid m_grid;
+
+	sf::Texture m_logoTexture;
+	sf::Texture m_mainBtnTex;
+	sf::Texture m_caveBtnTex;
+	sf::Texture m_generateBtnTex;
+
+	sf::Sprite m_logo;
+	sf::Sprite m_mainBtn;
+	sf::Sprite m_caveBtn;
+	sf::Sprite m_generateBtn;
+	
 };
 
 #endif // !DUNGEON_SCENE_H

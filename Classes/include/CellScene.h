@@ -10,7 +10,6 @@
 
 struct Cave
 {
-	sf::Texture m_tex;
 	sf::Vector2f m_position;
 	std::string m_rule;
 	int m_exitPos;
@@ -39,7 +38,6 @@ private:
 	void ClearDrawables();
 	void RestartScene();
 
-	void LoadTextures();
 	void CreateRoom(Node* node, Node* parent, int count);
 	void CreateExits(Node* node, Node* parent, Grid &g);
 	void RandomFill(Grid &g, const int chance);
@@ -56,7 +54,16 @@ private:
 	Grid m_grid;
 
 	std::vector<Grid> m_grids;
-	std::vector<sf::Texture*> m_textures;
+
+	sf::Texture m_logoTexture;
+	sf::Texture m_mainBtnTex;
+	sf::Texture m_dungeonBtnTex;
+	sf::Texture m_generateBtnTex;
+
+	sf::Sprite m_logo;
+	sf::Sprite m_mainBtn;
+	sf::Sprite m_dungeonBtn;
+	sf::Sprite m_generateBtn;
 
 };
 

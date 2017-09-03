@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>688</x>
+      <y>248</y>
+      <w>96</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>main
+-
++ game : Game
+-
++ main()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>360</y>
+      <w>208</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>Game
+-
+- m_scnMgr : SceneManager
+- m_window : sf::RenderWindow
+- TIMEPERFRAME : sf::Time = 0.0166
+-
++ Game()
++ ~Game()
++ Run()
++ Update( dt : sf::Time )
++ Render()
++ ProcessEvents()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>296</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>496</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>656</x>
+      <y>576</y>
+      <w>208</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>SceneManager
+-
+- m_currScene : Scene
+- m_scenes : vector&lt;Scene&gt;
+-
++ SceneManager()
++ ~SceneManager()
++ Update( dt : sf::Time )
++ HandleInput( e : sf::Event )
++ Render( window : sf::RenderWindow )
++ SwitchScene( scene : string )</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

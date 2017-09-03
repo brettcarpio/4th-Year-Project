@@ -15,9 +15,6 @@ public:
 	void Render();
 	void ProcessEvents();
 
-private: //functions
-
-
 private: //variables
 	sf::RenderWindow m_window;
 	static const sf::Time TimePerFrame;
